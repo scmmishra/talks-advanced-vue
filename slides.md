@@ -13,19 +13,25 @@ highlighter: shiki
 
 ---
 
-<h1 class="text-center">DeepSource</h1>
+<h1 class="text-center">
+  DeepSource
+</h1>
 
 <img alt="deepsource" src="/images/deepsource.png">
 
----
-
-<h1 class="text-center">Frappe Charts</h1>
-
-<img alt="deepsource" src="/images/frappe-charts.png">
+<!-- In a nutshell. We help developers save time by catching performance issues, anti-patterns, bug risks before they reach the codebase. We build a bunch of static analysis and code quality tools for this purpose. -->
 
 ---
 
 <h1 class="text-8xl font-black text-center mt-24">Let's Talk <span class="text-green-500">Vue</span></h1>
+
+<!--
+This talk although titled advanced scratches only the surface of the concepts I'm planning to explain you here. And is targeted towards people who have just started their Vue journey.
+
+I also have a much more detailed advanced talk on building good components I delivered last month at Vue BLR Meetup.. I'll be sharing links to that at the end of the talk.
+
+Let's start with the fundamentals... On how Vue provides avenues of abstraction for you.
+-->
 
 ---
 
@@ -90,6 +96,10 @@ export default {
 
 ## A Button Component
 
+<div class="grid grid-cols-2 gap-4">
+
+<v-clicks>
+
 ```vue {1-5|7-15|17-22|all}
 <template>
   <button @click="onClick" class="button">
@@ -109,11 +119,20 @@ export default {
 
 <style>
 .button {
-  padding: 6px 8px;
-  background-color: #252525;
+  padding: 4px 12px;
+  border-radius: 4px;
+  background-color: #22c55e;
 }
 </style>
 ```
+
+  <div class="space-y-4">
+    <ButtonDemo />
+  </div>
+
+</v-clicks>
+
+</div>
 
 ---
 
@@ -139,9 +158,68 @@ A renderless component renders exactly what you pass into it, without any extra 
 
 ---
 
+## Renderless Toggle
+
+<div class="grid grid-cols-2 mt-2 gap-4">
+
+<v-clicks>
+
+```js {all|17-19|5,12|5-12|7|8|9|10|all}
+export default {
+  props: {
+    on: { type: Boolean, default: false },
+  },
+  render() {
+    return this.$scopedSlots.default({
+      on: this.state,
+      setOn: this.setOn,
+      setOff: this.setOff,
+      toggle: this.toggle,
+    });
+  },
+  data() {
+    return { state: this.on };
+  },
+  methods: {
+    setOn: () => (this.state = true),
+    setOff: () => (this.state = false),
+    toggle: () => (this.state = !this.state),
+  },
+};
+```
+
+  <div class="flex flex-col space-y-3 mb-1">
+    
+```vue
+<template>
+  <toggle>
+    <div slot-scope="{ on, setOn, setOff }">
+      <button @click="click(setOn)">Toggle On</button>
+      <button @click="click(setOff)">Toggle Off</button>
+      <span v-if="on">It's On.</span>
+      <span v-else>It's Off.</span>
+    </div>
+  </toggle>
+</template>
+```
+
+<RenderlessDemo />
+
+</div>
+
+</v-clicks>
+
+</div>
+
+---
+
 <h1 class="text-center">Headless UI</h1>
 
 <img alt="headless" src="/images/headless.png">
+
+---
+
+<h1 class="text-8xl font-black text-center mt-24">Mixins</h1>
 
 ---
 
@@ -388,10 +466,12 @@ Vue provides us with a comprehensive suite of hooks that are triggered at specif
 
 ## Outside Click Directive
 
+<div class="grid grid-cols-2 mt-2 gap-4">
+
 ```vue {all|2|3-5|3}
 <template>
-  <button v-on:click="toggle" class="dropdown-button">Menu</button>
-  <div v-if="isOpen" v-outside-click="close" class="dropdown-body">
+  <button v-on:click="toggle">Menu</button>
+  <div v-if="isOpen" v-outside-click="close">
     <!-- Dropdown Body -->
   </div>
 </template>
@@ -400,7 +480,7 @@ Vue provides us with a comprehensive suite of hooks that are triggered at specif
 export default {
   name: 'ToyDropdown'
   data: {
-	return {isOpen: false}
+	  return {isOpen: false}
   },
   methods: {
 	toggle() {
@@ -413,6 +493,12 @@ export default {
 }
 </script>
 ```
+
+<div class="code-demo">
+  <DirectiveDemoBroken />
+</div>
+
+</div>
 
 ---
 
@@ -512,6 +598,44 @@ Vue.directive("outside-click", outsideClickDirective);
 
 ---
 
+### Demo
+
+<div class="grid grid-cols-2 mt-2 gap-4">
+
+```vue
+<template>
+  <button v-on:click="toggle">Menu</button>
+  <div v-if="isOpen" v-outside-click="close">
+    <!-- Dropdown Body -->
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'ToyDropdown'
+  data: {
+	  return {isOpen: false}
+  },
+  methods: {
+    toggle() {
+      this.isOpen = !this.isOpen
+    },
+    close() {
+      this.isOpen = false
+    }
+  }
+}
+</script>
+```
+
+<div class="code-demo">
+  <DirectiveDemo />
+</div>
+
+</div>
+
+---
+
 <div class="text-center">
 <h1 class="text-5xl font-black text-center mt-24">That's all Folks</h1>
 <p class="text-center mx-auto">hey[at]shivam.dev</p>
@@ -535,5 +659,6 @@ Vue.directive("outside-click", outsideClickDirective);
 - [Vue Docs: Components](https://vuejs.org/v2/guide/components.html)
 - [Vue Docs: Mixins](https://vuejs.org/v2/guide/mixins.html)
 - [Vue Docs: Directives](https://vuejs.org/v2/guide/custom-directive.html)
+- [Vue BLR 30](https://www.youtube.com/watch?v=o5NG4LoxkIo)
 - [Outside Click Directive](https://shivam.dev/blog/outside-click)
 - [Renderless Components by Adam Wathan](https://adamwathan.me/renderless-components-in-vuejs/)
