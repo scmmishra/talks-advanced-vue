@@ -191,38 +191,6 @@ export default {
 
 ---
 
-## Modal Component
-
-```vue {all|12|6,20-22|2,3,14,18|13-19,23}
-<template>
-  <button @click="toggleShow">Click to Toggle Modal</button>
-  <div v-if="isShowing" class="modal">
-    <h4>{{ title }}</h4>
-    <slot></slot>
-    <button @click="triggerAction">{{ actionLabel }}</button>
-  </div>
-</template>
-
-<script>
-export default {
-  props: ['title', 'actionLabel']
-  data() {
-    return { isShowing: false }
-  },
-  methods: {
-    toggleShow() {
-      this.isShowing = !this.isShowing;
-    },
-    triggerAction() {
-      this.$emit('success')
-    }
-  }
-}
-</script>
-```
-
----
-
 ## Tooltip Component
 
 ```vue {all|11-18}
