@@ -239,7 +239,9 @@ const toggle = {
 
 ## Refactored Modal and Tooltip
 
-```js
+<v-clicks>
+
+```js {1|5|all}
 import { toggle } from './mixins/toggle'
 
 export default {
@@ -253,7 +255,7 @@ export default {
 }
 ```
 
-```js
+```js {1|5|all}
 import { toggle } from './mixins/toggle'
 
 export default {
@@ -261,6 +263,8 @@ export default {
   mixins: [toggle]
 }
 ```
+
+</v-clicks>
 
 ---
 
@@ -270,7 +274,7 @@ export default {
 
 - Should find and **run the `fetch` method on creation**
 
-- Check is fetch is **running**, **successful** or **errored**
+- Check if the fetch is **running**, **successful** or **errored**
 
 </v-clicks>
 
