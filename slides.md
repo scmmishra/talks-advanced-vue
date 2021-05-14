@@ -62,7 +62,7 @@ highlighter: shiki
 
 ---
 
-## Basic Structure of a components
+## Basic Structure of a component
 
 ```vue {1-3|5-15|17-19|7|8|9-11|12|13}
 <template>
