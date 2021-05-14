@@ -133,6 +133,13 @@ pre.slidev-code {
   border: 1px solid var(--accents-2);
 }
 
+.code-demo {
+  border-radius: var(--geist-radius);
+  margin-top: 4px;
+  padding: 0.1rem 0.3rem;
+  border: 1px solid var(--accents-2);
+}
+
 kbd {
   background-color: var(--accents-1);
   padding: 0.1rem 0.3rem;
