@@ -637,8 +637,11 @@ export default {
 ---
 
 <div class="text-center">
+<v-clicks>
 <h1 class="text-5xl font-black text-center mt-24">That's all Folks</h1>
 <p class="text-center mx-auto">hey[at]shivam.dev</p>
+<p class="text-center mx-auto">advanced-vue.shivam.dev</p>
+</v-clicks>
 </div>
 
 ---
