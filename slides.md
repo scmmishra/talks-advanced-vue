@@ -384,17 +384,11 @@ Vue provides us with a comprehensive suite of hooks that are triggered at specif
 
 </v-clicks>
 
-<v-click :at="6">
-
-Vue documentation has a good example a `v-focus` directive with `autofocus` like behaviour for input components. You can check it out [here](https://vuejs.org/v2/guide/custom-directive.html#Intro).
-
-</v-click>
-
 ---
 
 ## Outside Click Directive
 
-```vue {all|3}
+```vue {all|2|3-5|3}
 <template>
   <button v-on:click="toggle" class="dropdown-button">Menu</button>
   <div v-if="isOpen" v-outside-click="close" class="dropdown-body">
@@ -427,10 +421,10 @@ export default {
 <!-- Here we want a function close to be triggered when clicked outside the element we’ve created the binding with Let’s start with a function that does exactly that. -->
 
 ```js {all|3,5|4}
-function onDocumentClick(e, el, fn) {
-  let target = e.target;
-  if (el !== target && !el.contains(target)) {
-    fn(e);
+function onDocumentClick(event, element, functionToTrigger) {
+  let target = event.target;
+  if (element !== target && !element.contains(target)) {
+    functionToTrigger(e);
   }
 }
 ```
